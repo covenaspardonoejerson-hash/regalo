@@ -1,0 +1,635 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Para ti 🌹</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+
+            font-family: Georgia, serif;
+
+            background:
+                radial-gradient(circle at center,
+                #35101c 0%,
+                #16070d 45%,
+                #050505 100%);
+
+            color: white;
+        }
+
+        /* =========================
+           PANTALLA PRINCIPAL
+        ========================= */
+
+        .contenedor {
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            position: relative;
+
+            padding-top: 45px;
+        }
+
+        h1 {
+            font-size: 32px;
+            text-align: center;
+
+            color: #ffd6df;
+
+            text-shadow:
+                0 0 10px #ff5577,
+                0 0 25px #ff5577;
+
+            animation: aparecer 2s ease;
+        }
+
+        .subtitulo {
+            margin-top: 12px;
+
+            width: 90%;
+
+            text-align: center;
+
+            color: #f7cbd4;
+
+            font-size: 16px;
+
+            line-height: 1.5;
+        }
+
+        /* =========================
+           ROSAS
+        ========================= */
+
+        .rosas {
+            position: absolute;
+
+            bottom: 80px;
+
+            width: 100%;
+            height: 390px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .rosa {
+            position: absolute;
+
+            width: 145px;
+            height: 145px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            cursor: pointer;
+
+            border: 4px solid rgba(255,255,255,0.7);
+
+            box-shadow:
+                0 0 15px rgba(255,70,100,0.5),
+                0 0 35px rgba(255,50,80,0.3);
+
+            transition:
+                transform 0.4s,
+                box-shadow 0.4s;
+
+            animation: flotar 4s ease-in-out infinite;
+        }
+
+        .rosa:hover {
+            transform: scale(1.12);
+
+            box-shadow:
+                0 0 20px #ff5577,
+                0 0 50px #ff5577;
+        }
+
+        /* Posiciones */
+
+        .rosa1 {
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .rosa2 {
+            bottom: 70px;
+            left: 13%;
+            width: 115px;
+            height: 115px;
+
+            animation-delay: .5s;
+        }
+
+        .rosa3 {
+            bottom: 80px;
+            right: 13%;
+            width: 115px;
+            height: 115px;
+
+            animation-delay: 1s;
+        }
+
+        .rosa4 {
+            bottom: 185px;
+            left: 25%;
+            width: 100px;
+            height: 100px;
+
+            animation-delay: 1.5s;
+        }
+
+        .rosa5 {
+            bottom: 190px;
+            right: 25%;
+            width: 100px;
+            height: 100px;
+
+            animation-delay: 2s;
+        }
+
+        /* =========================
+           TEXTO
+        ========================= */
+
+        .frase {
+            position: absolute;
+
+            font-size: 15px;
+
+            color: #ffc6d1;
+
+            text-shadow: 0 0 8px #ff5577;
+
+            animation: aparecer 3s ease;
+        }
+
+        .f1 {
+            top: 30%;
+            left: 8%;
+        }
+
+        .f2 {
+            top: 38%;
+            right: 8%;
+        }
+
+        .f3 {
+            top: 48%;
+            left: 10%;
+        }
+
+        .f4 {
+            top: 55%;
+            right: 10%;
+        }
+
+        /* =========================
+           BOTÓN
+        ========================= */
+
+        .mensaje {
+            position: absolute;
+
+            bottom: 20px;
+
+            font-size: 14px;
+
+            color: #ffcbd5;
+
+            animation: parpadear 2s infinite;
+        }
+
+        /* =========================
+           CARTA
+        ========================= */
+
+        .carta-fondo {
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.82);
+
+            display: none;
+
+            justify-content: center;
+            align-items: center;
+
+            z-index: 100;
+        }
+
+        .carta-fondo.activa {
+            display: flex;
+        }
+
+        .carta {
+
+            width: 88%;
+            max-width: 430px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #fffaf0,
+                    #ffeef2
+                );
+
+            color: #4b1724;
+
+            padding: 30px 25px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 0 30px rgba(255,100,130,0.7);
+
+            position: relative;
+
+            animation: abrirCarta .6s ease;
+        }
+
+        .carta h2 {
+
+            text-align: center;
+
+            color: #b3214b;
+
+            margin-bottom: 20px;
+
+            font-size: 26px;
+        }
+
+        .carta p {
+
+            font-family: Georgia, serif;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            text-align: center;
+        }
+
+        .firma {
+
+            margin-top: 25px;
+
+            text-align: right;
+
+            font-style: italic;
+
+            color: #9d2949;
+        }
+
+        .cerrar {
+
+            position: absolute;
+
+            top: 10px;
+            right: 15px;
+
+            border: none;
+
+            background: none;
+
+            color: #a51d43;
+
+            font-size: 25px;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           ANIMACIONES
+        ========================= */
+
+        @keyframes flotar {
+
+            0%,100% {
+                margin-bottom: 0;
+            }
+
+            50% {
+                margin-bottom: 12px;
+            }
+        }
+
+        @keyframes aparecer {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes parpadear {
+
+            0%,100% {
+                opacity: .5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes abrirCarta {
+
+            from {
+                opacity: 0;
+                transform: scale(.6) rotate(-3deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        /* =========================
+           CELULAR
+        ========================= */
+
+        @media (max-width: 500px) {
+
+            h1 {
+                font-size: 27px;
+            }
+
+            .subtitulo {
+                font-size: 14px;
+            }
+
+            .rosa1 {
+                width: 125px;
+                height: 125px;
+            }
+
+            .rosa2,
+            .rosa3 {
+                width: 90px;
+                height: 90px;
+            }
+
+            .rosa4,
+            .rosa5 {
+                width: 75px;
+                height: 75px;
+            }
+
+            .frase {
+                font-size: 13px;
+            }
+
+            .carta {
+                width: 90%;
+                padding: 28px 20px;
+            }
+
+            .carta p {
+                font-size: 16px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Para ti, mi persona especial 🌻❤️</h1>
+
+        <div class="subtitulo">
+            Hay personas que llegan a nuestra vida
+            y, sin darse cuenta, hacen que todo sea
+            un poquito más bonito. ✨
+        </div>
+
+        <!-- FRASES -->
+
+        <div class="frase f1">Eres una personita muy especial ❤️</div>
+
+        <div class="frase f2">Tu sonrisa hace bonito cualquier momento 🌻</div>
+
+        <div class="frase f3">Qué bonito es tenerte en mi vida ✨</div>
+
+        <div class="frase f4">Siempre tendrás un lugar especial en mi corazón 💕</div>
+
+
+        <!-- ROSAS -->
+
+        <div class="rosas">
+
+            <img
+                src="img/girasol.jpg"
+                class="rosa rosa1"
+                onclick="abrirCarta()"
+            >
+
+            <img
+                src="img/girasol.jpg"
+                class="rosa rosa2"
+                onclick="abrirCarta()"
+            >
+
+            <img
+                src="img/girasol.jpg"
+                class="rosa rosa3"
+                onclick="abrirCarta()"
+            >
+
+            <img
+                src="img/girasol.jpg"
+                class="rosa rosa4"
+                onclick="abrirCarta()"
+            >
+
+            <img
+                src="img/foto.jpeg"
+                class="rosa rosa5"
+                onclick="abrirCarta()"
+            >
+
+        </div>
+
+
+        <div class="mensaje">
+            🌻 Toca una flor para descubrir unas palabras bonitas para ti 🌻
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         CARTA
+    ========================= -->
+
+    <div class="carta-fondo" id="carta">
+
+        <div class="carta">
+
+            <button
+                class="cerrar"
+                onclick="cerrarCarta()">
+                ×
+            </button>
+
+            <h2>Para ti ❤️</h2>
+
+            <p>
+                Quería regalarte algo diferente,
+                algo sencillo pero hecho con mucho cariño,
+                algo que cuando lo veas puedas
+                recordar lo mucho que significas
+                para mí.
+                <br><br>
+
+                Tal vez estas palabras no sean
+                suficientes para explicar todo
+                lo bonito que siento cuando pienso en ti,
+                pero quiero que sepas que eres
+                una persona muy especial para mí.
+                <br><br>
+
+                Me encanta saber que existes,
+                que puedo compartir momentos contigo
+                y que entre tantas personas en este mundo
+                tuve la suerte de coincidir contigo. ✨
+                <br><br>
+
+                Tu sonrisa tiene algo especial,
+                porque puede hacer que un momento sencillo
+                se convierta en un recuerdo bonito.
+                <br><br>
+
+                Gracias por ser tú,
+                por tu forma de ser,
+                por esos pequeños detalles que quizá
+                para ti no significan mucho,
+                pero que pueden alegrarme muchísimo. ❤️
+                <br><br>
+
+                Quiero que nunca olvides que mereces
+                cosas bonitas, momentos felices,
+                abrazos sinceros, sonrisas verdaderas
+                y personas que sepan valorar
+                el hermoso corazón que tienes. 🌻
+                <br><br>
+
+                Estas flores son solo un pequeño detalle,
+                pero llevan consigo un pedacito
+                de todo el cariño que quería regalarte.
+                <br><br>
+
+                Espero que cuando las mires,
+                recuerdes que eres alguien importante,
+                alguien que merece sentirse querida,
+                valorada y especial.
+                <br><br>
+
+                Y si algún día estás triste,
+                quiero que recuerdes que incluso
+                en los días grises siempre puede existir
+                un pequeño motivo para sonreír. ✨
+                <br><br>
+
+                Ojalá esta pequeña sorpresa
+                pueda iluminar tu día
+                de la misma manera en que tú
+                puedes iluminar el mío
+                simplemente con una sonrisa.
+                <br><br>
+
+                Gracias por existir,
+                gracias por ser una persona tan bonita
+                y gracias por formar parte
+                de mis recuerdos más especiales. 💕
+                <br><br>
+
+                Espero que estas flores te recuerden
+                algo muy sencillo:
+                <strong>
+                    eres especial, eres importante
+                    y mereces recibir todo lo bonito
+                    que la vida pueda regalarte. 🌻❤️
+                </strong>
+            </p>
+
+            <div class="firma">
+                Con mucho cariño ❤️<br>
+                Para una personita muy especial 🌻
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function abrirCarta() {
+
+            document
+                .getElementById("carta")
+                .classList.add("activa");
+
+        }
+
+
+        function cerrarCarta() {
+
+            document
+                .getElementById("carta")
+                .classList.remove("activa");
+
+        }
+
+
+        /* Cerrar tocando fuera de la carta */
+
+        document
+            .getElementById("carta")
+            .addEventListener("click", function(event) {
+
+                if (event.target === this) {
+
+                    cerrarCarta();
+
+                }
+
+            });
+
+    </script>
+
+</body>
+</html>
+
